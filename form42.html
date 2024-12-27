@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            color: #2c3e50;
+            font-weight: 700;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+            border-color: #3498db;
+            background-color: #fff;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+            animation: fadeIn 0.3s ease;
+            font-weight: 500;
+            padding-left: 0.5rem;
+            border-left: 3px solid #e74c3c;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .password-strength {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .strength-weak { 
+            color: #fff;
+            background-color: #e74c3c;
+        }
+
+        .strength-medium {
+            color: #fff;
+            background-color: #f39c12;
+        }
+
+        .strength-strong {
+            color: #fff;
+            background-color: #27ae60;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4">Registration</h2>
+                        <form id="registrationForm" novalidate>
+                            <!-- Full Name -->
+                            <div class="mb-3">
+                                <label for="fullName" class="form-label">Full Name *</label>
+                                <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+                                <div class="error-message" id="fullNameError"></div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                                <div class="error-message" id="emailError"></div>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone Number *</label>
+                                <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
+                                <div class="error-message" id="phoneError"></div>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password *</label>
+                                <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                                <div class="error-message" id="passwordError"></div>
+                                <div class="password-strength" id="passwordStrength"></div>
+                            </div>
+
+                            <!-- Confirm Password -->
+                            <div class="mb-3">
+                                <label for="confirmPassword" class="form-label">Confirm Password *</label>
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+                                <div class="error-message" id="confirmPasswordError"></div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (validateForm()) {
+                alert('Form submitted successfully!');
+                this.reset();
+            }
+        });
+
+        const fields = ['fullName', 'email', 'phone', 'password', 'confirmPassword'];
+        fields.forEach(field => {
+            document.getElementById(field).addEventListener('input', function() {
+                validateField(field);
+            });
+        });
+
+        function validateForm() {
+            let isValid = true;
+            fields.forEach(field => {
+                if (!validateField(field)) {
+                    isValid = false;
+                }
+            });
+            return isValid;
+        }
+
+        function validateField(fieldName) {
+            const field = document.getElementById(fieldName);
+            const errorElement = document.getElementById(`${fieldName}Error`);
+            let isValid = true;
+
+            switch(fieldName) {
+                case 'fullName':
+                    if (field.value.trim().length < 5) {
+                        showError(field, errorElement, 'Name must be at least 5 characters long');
+                        isValid = false;
+                    } else {
+                        hideError(field, errorElement);
+                    }
+                    break;
+
+                case 'email':
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(field.value)) {
+                        showError(field, errorElement, 'Please enter a valid email address');
+                        isValid = false;
+                    } else {
+                        hideError(field, errorElement);
+                    }
+                    break;
+
+                case 'phone':
+                    const phoneRegex = /^\d{10}$/;
+                    if (!phoneRegex.test(field.value) || field.value === '1234567890') {
+                        showError(field, errorElement, 'Please enter a valid 10-digit phone number');
+                        isValid = false;
+                    } else {
+                        hideError(field, errorElement);
+                    }
+                    break;
+
+                case 'password':
+                    const password = field.value;
+                    const fullName = document.getElementById('fullName').value.toLowerCase();
+                    
+                    if (password.length < 8) {
+                        showError(field, errorElement, 'Password must be at least 8 characters long');
+                        isValid = false;
+                    } else if (password.toLowerCase() === 'password') {
+                        showError(field, errorElement, 'Password cannot be "password"');
+                        isValid = false;
+                    } else if (password.toLowerCase() === fullName) {
+                        showError(field, errorElement, 'Password cannot be your name');
+                        isValid = false;
+                    } else {
+                        hideError(field, errorElement);
+                        const strength = checkPasswordStrength(password);
+                        const strengthElement = document.getElementById('passwordStrength');
+                        strengthElement.textContent = `Password Strength: ${strength}`;
+                        strengthElement.className = `password-strength strength-${strength.toLowerCase()}`;
+                    }
+                    break;
+
+                case 'confirmPassword':
+                    const passwordField = document.getElementById('password');
+                    if (field.value !== passwordField.value) {
+                        showError(field, errorElement, 'Passwords do not match');
+                        isValid = false;
+                    } else {
+                        hideError(field, errorElement);
+                    }
+                    break;
+            }
+
+            return isValid;
+        }
+
+        function showError(field, errorElement, message) {
+            field.classList.add('is-invalid');
+            errorElement.style.display = 'block';
+            errorElement.textContent = message;
+        }
+
+        function hideError(field, errorElement) {
+            field.classList.remove('is-invalid');
+            errorElement.style.display = 'none';
+            errorElement.textContent = '';
+        }
+
+        function checkPasswordStrength(password) {
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasNumbers = /\d/.test(password);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            
+            const strength = 
+                (hasUpperCase ? 1 : 0) + 
+                (hasLowerCase ? 1 : 0) + 
+                (hasNumbers ? 1 : 0) + 
+                (hasSpecialChar ? 1 : 0);
+
+            if (strength < 2) return 'Weak';
+            if (strength < 4) return 'Medium';
+            return 'Strong';
+        }
+    </script>
+</body>
+</html>
